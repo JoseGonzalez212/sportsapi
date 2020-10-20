@@ -1,0 +1,27 @@
+.header {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 20% 33% auto;
+  margin-right: 250px;
+}
+
+.logout {
+  height: 30%;
+  width: 20%;
+  margin-top: 45px;
+  justify-self: end;
+}
+
+.logo {
+  justify-self: end;
+  margin-right: 10px;
+}
+
+.header-text {
+  margin-top: 50px;
+}
+
+.menu {
+  margin-left: 145px;
+  margin-right: 250px;
+}

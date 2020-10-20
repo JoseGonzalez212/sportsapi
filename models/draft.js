@@ -6,6 +6,9 @@ const draftSchema = new mongoose.Schema({
   },
   team: {
     type: String
+  },
+  player: {
+    type: String
   }
 });
 

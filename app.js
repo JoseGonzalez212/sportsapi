@@ -9,14 +9,15 @@ const userRouter = require('./routes/user');
 const draftRounter = require('./routes/draft');
 
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/sports', { useNewUrlParser: true, useUnifiedTopology: true });
+// enter password for 'PWD'
+mongoose.connect('mongodb+srv://jose123:PWD@cluster0.vml09.mongodb.net/development?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on('error', (error) => console.log(error));
 db.once('open', () => console.log("connected to database"));
 
 app.use(express.json());
 
+app.use(express.static('./views'));
 app.use('/', indexRouter);
 app.use('/teams', teamsRouter);
 app.use('/games', gamesRouter);

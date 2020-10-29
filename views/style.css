@@ -1,8 +1,7 @@
 .header {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 20% 33% auto;
-  margin-right: 250px;
+  grid-template-columns: 10% 33% auto;
 }
 
 .logout {
@@ -22,6 +21,15 @@
 }
 
 .menu {
-  margin-left: 145px;
-  margin-right: 250px;
+
+}
+
+.app {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.teamtable {
+  margin-top: 70px;
+  width: 70%;
 }

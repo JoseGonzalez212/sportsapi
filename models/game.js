@@ -1,34 +1,122 @@
 const mongoose = require('mongoose');
 
 const gameSchema = new mongoose.Schema({
+    Team: {
+        type: String
+    },
+    MatchUp: {
+        type: String
+    },
     GameDate: {
-        type: String, 
-        required: true
-    },
-    GameStatus: {
         type: String
     },
-    HomeTeam: {
+    WL: {
         type: String
     },
-    VistorTeam: {
+    MIN: {
         type: String
     },
-    Season: {
+    PTS: {
         type: String
     },
-    WinnerTeam: {
+    FGM: {
         type: String
     },
-    HomeTeamPoints: {
+    FGA: {
         type: String
     },
-    VistorTeamPoints: {
+    FG: {
         type: String
     },
-    predictedWinner: {
+
+    ThreePM: {
+        type: String
+    },
+    ThreePA: {
+        type: String
+    },
+    ThreeP: {
+        type: String
+    },
+    FTM: {
+        type: String
+    },
+    FTA: {
+        type: String
+    },
+    FT: {
+        type: String
+    },
+    OREB: {
+        type: String
+    },
+    DREB: {
+        type: String
+    },
+    REB: {
+        type: String
+    },
+    AST: {
+        type: String
+    },
+    STL: {
+        type: String
+    },
+    BLK: {
+        type: String
+    },
+    TOV: {
+        type: String
+    },
+    PF: {
+        type: String
+    },
+    PlusMinus: {
+        type: String
+    },
+    OFFRTG: {
+        type: String
+    },
+    DEFRTG: {
+        type: String
+    },
+    NETRTG: {
+        type: String
+    },
+    AST: {
+        type: String
+    },
+    ASTTO: {
+        type: String
+    },
+    ASTRATIO: {
+        type: String
+    },
+    OREB: {
+        type: String
+    },
+    DREB: {
+        type: String
+    },
+    REB: {
+        type: String
+    },
+    TOV: {
+        type: String
+    },
+    EFG: {
+        type: String
+    },
+    TS: {
+        type: String
+    },
+    PACE: {
+        type: String
+    },
+    PIE: {
         type: String
     }
+
 });
 
 module.exports = mongoose.model('Game', gameSchema);

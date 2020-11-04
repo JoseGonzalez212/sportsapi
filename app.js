@@ -7,6 +7,7 @@ const gamesRouter = require('./routes/games');
 const playersRouter = require('./routes/players');
 const userRouter = require('./routes/user');
 const draftRounter = require('./routes/draft');
+const apikeyRouter = require("./routes/apikey")
 
 const mongoose = require('mongoose');
 // enter password for 'PWD'
@@ -23,5 +24,6 @@ app.use('/games', gamesRouter);
 app.use('/players', playersRouter);
 app.use('/user', userRouter);
 app.use('/draft', draftRounter);
+app.use('/apikey', apikeyRouter);
 
 app.listen(port, () => console.log(`Sports API app listening on port ${port}`))

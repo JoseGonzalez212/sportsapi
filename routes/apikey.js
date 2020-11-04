@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const user = require('../models/user');
+const apikey = require('../models/apikey');
 
 // Get one user
 router.get('/:username', getUserWithEmail, (req, res) => {
@@ -9,36 +9,16 @@ router.get('/:username', getUserWithEmail, (req, res) => {
 
 // Create one
 router.post('/', async (req, res) => {
-    const userValues = new user({
+    const userValues = new apikey({
         ...req.body
     });
     try {
-        const newUser = await user(userValues).save();
+        const newUser = await apikey(userValues).save();
         res.status(201).json(newUser);
     } catch (err) {
         res.status(400).json({ message: err.message});
     }
 })
-
-// update one
-router.patch('/:id', getUser, (req, res) => {
-    // if new attributes added to model then need more if statements
-    if (req.body.username) {
-        res.user.username = req.body.username;
-    }
-
-    if (req.body.password) {
-      res.user.password = req.body.password;
-    }
-
-    if (req.body.city) {
-      res.user.city = req.body.city;
-    }
-
-      res.user.save();
-      res.send(res.user)
-    
-});
 
 async function getUser(req, res, next) {
     let userFound;
@@ -57,7 +37,7 @@ async function getUser(req, res, next) {
 async function getUserWithEmail(req, res, next) {
     let userFound;
     try {
-      userFound = await user.find({username: req.params.username});
+      userFound = await apikey.find({username: req.params.username});
         if (userFound == null || userFound == []) {
             return res.status(404).json( {message: 'Cannot find team'});
         }

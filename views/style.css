@@ -1,7 +1,7 @@
 .header {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: 10% 33% auto;
+  grid-template-columns: 10% 20% auto;
 }
 
 .logout {
@@ -30,6 +30,15 @@
 }
 
 .teamtable {
-  margin-top: 70px;
+  margin-top: 10px;
   width: 70%;
+}
+
+.season-select {
+  margin-top: 15px;
+}
+
+.filter-menu {
+  display: inline-grid;
+  grid-template-columns: 80px 50px ;
 }

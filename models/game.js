@@ -115,6 +115,12 @@ const gameSchema = new mongoose.Schema({
     },
     PIE: {
         type: String
+    },
+    live: {
+        type: String
+    },
+    currentScore: {
+        type: String
     }
 
 });

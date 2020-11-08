@@ -14,6 +14,24 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get all games
+router.get('/live', async (req, res) => {
+    try {
+        const games = await game.find();
+        let liveGames = []
+        for (let i = 0; i < games.length; i++) {
+            if (games[i].live == "live") {
+                liveGames.push(games[i])
+            }
+        }
+
+        // add prediction to each live game
+        res.json(liveGames);
+    } catch (err) {
+        res.status(500).json({ message: err.message});
+    }
+});
+
 // Get all games for year
 router.get('/year/:year', async (req, res) => {
     try {
@@ -79,7 +97,9 @@ router.post('/', async (req, res) => {
         EFG: req.body.EFG,
         TS: req.body.TS,
         PACE: req.body.PACE,
-        PIE: req.body.PIE
+        PIE: req.body.PIE,
+        live: req.body.live,
+        currentScore: req.body.currentScore
     });
     try {
         const newGame = await game(gameValues).save();

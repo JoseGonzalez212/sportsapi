@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
-    <body>
+    <body onload="loadTeams()">
       <div class="app" id="app">
         <div class="header">
           <img src="sportLogo.png" alt="..." class="logo">
@@ -23,10 +23,17 @@
                   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" >Teams</a>
+                  <a class="nav-link" href="#" onclick="loadTeamsList()">Teams</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Players</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Top Players
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#" onclick="loadPlayersAPG(this)">Points Per Game</a>
+                    <a class="dropdown-item" href="#" onclick="loadPlayersBlocks(this)">Blocks Per Game</a>
+                    <a class="dropdown-item" href="#" onclick="loadPlayersAPPG(this)">Assists Per Game</a>
+                  </div>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" onclick="loadGames()" href="#">Season Data</a>
@@ -52,6 +59,8 @@
     
       </div>
       
+      <script src="teamsList.js"></script>
+      <script src="players.js"></script>
       <script src="game.js"></script>
       <script src="teams.js"></script>
       <script src="developer.js"></script>

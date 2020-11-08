@@ -42,3 +42,10 @@
   display: inline-grid;
   grid-template-columns: 80px 50px ;
 }
+
+.teamWrapper {
+  margin-top: 25px;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: auto auto;
+}

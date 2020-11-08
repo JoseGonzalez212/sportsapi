@@ -22,9 +22,35 @@ router.get('/:id', getTeam, (req, res) => {
 // Create one
 router.post('/', async (req, res) => {
     const teamValues = new team({
-        name: req.body.name, 
-        location: req.body.location,
-        ranking: req.body.ranking
+        ranking: req.body.ranking,
+        team: req.body.team,
+        Conference: req.body.Conference,
+        GP: req.body.GP,
+        W: req.body.W,
+        L: req.body.L,
+        WIN: req.body.WIN,
+        MIN: req.body.MIN,
+        PTS: req.body.PTS,
+        FGM: req.body.FGM,
+        FGA: req.body.FGA,
+        FG: req.body.FG,
+        ThreePM: req.body.ThreePM,
+        ThreePA: req.body.TheePA,
+        ThreeP: req.body.ThreeP,
+        FTM: req.body.FTM,
+        FTA: req.body.FTA,
+        FT: req.body.FT,
+        OREB: req.body.OREB,
+        DREB: req.body.DREB,
+        REB: req.body.REB,
+        AST: req.body.AST,
+        TOV: req.body.TOV,
+        STL: req.body.STL,
+        BLK: req.body.BLK,
+        BLKA: req.body.BLKA,
+        PF: req.body.PF,
+        PFD: req.body.PFD,
+        PlusMinus: req.body.PlusMinus,
     });
     try {
         const newTeam = await team(teamValues).save();

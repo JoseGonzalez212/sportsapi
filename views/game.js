@@ -45,6 +45,7 @@ function loadGames() {
       let div = document.createElement("div");
 
       let table = `
+      <h5>Season Game Data</h5>
       <div class="filter-menu"> 
         <div class="dropdown season-select">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,19 +77,26 @@ function loadGames() {
             <tr>
               <th scope="col">Match Up</th>
               <th scope="col">Game Date</th>
-              <th scope="col">W/L</th>
+              <th scope="col">Winner</th>
               <th scope="col">PTS</th>
             </tr>
           </thead>
           <tbody id="gameRows">
       `;
       
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 500; i++) {
+        let winner;
+        console.log(data[i])
+        if (data[i].WL == 'W') {
+          winner = data[i].Team
+        } else {
+          winner = data[i].MatchUp.substr(7, 10)
+        }
         table += `
           <tr>
             <td>${data[i].MatchUp}</td>
             <td class="gameDate" >${data[i].GameDate}</td>
-            <td>${data[i].WL}</td>
+            <td>${winner}</td>
             <td>${data[i].PTS}</td>
           </tr>
         `

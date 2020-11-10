@@ -1,8 +1,11 @@
+const { response } = require('express');
 var express = require('express');
 var router = express.Router();
 var path = require('path');
 const { subscribe } = require('.');
 const game = require("../models/game");
+const team = require('../models/team');
+
 
 // Get all games
 router.get('/', async (req, res) => {
@@ -21,12 +24,49 @@ router.get('/live', async (req, res) => {
         let liveGames = []
         for (let i = 0; i < games.length; i++) {
             if (games[i].live == "live") {
-                liveGames.push(games[i])
+                let newGameS = {
+                    MatchUp: games[i].MatchUp,
+                    GameDate: games[i].GameDate,
+                    currentScore: games[i].currentScore
+                }
+
+                liveGames.push(newGameS)
             }
         }
-
         // add prediction to each live game
+
+        for (let i = 1; i < liveGames.length; i++) {
+            let newPrediction = await getPrediction(games, liveGames, i)
+            console.log("new pred " + newPrediction)
+            //liveGames[i].predictedWinner = newPrediction + ""
+
+            // // get frist team data
+            // let team1 = getTeam(games, liveGames[i].MatchUp.split(" vs. ")[0])
+
+            // let {PythonShell} = require('python-shell')
+            // //let pyshell = new PythonShell('/mnt/c/Users/Jose/Desktop/SeniorProject/sportsapi/python/modal.py');
+            // let pyshell = new PythonShell(`\python\\modal.py`);
+            // console.log(Object.values(team1))
+            // pyshell.send(JSON.stringify(Object.values(team1)))
+
+            // pyshell.on('message', function (message) {
+            //     console.log("getting message")
+            //     console.log("Node: " + message)
+            //     liveGames[i].predictedWinner = message
+            // })
+
+            // pyshell.end(function (err) {
+            //     console.log(err)
+            //     console.log('fin')
+            // })
+
+        }
+        console.log("DONE")
+        console.log(liveGames)
         res.json(liveGames);
+
+
+
     } catch (err) {
         res.status(500).json({ message: err.message});
     }
@@ -165,6 +205,87 @@ async function getGame(req, res, next) {
     }
     res.game = gameFound;
     next();
+}
+
+function getTeam(games, MatchUp) {
+    let newTest;
+    for (let i = 1; i < games.length; i++) {
+        if (games[i].Team == MatchUp) {
+            newTest = games[i]
+            break;
+        }
+    }
+    let modalGame = {
+        "FGM": newTest.FGM,
+        "FGA": newTest.FGA,
+        "FG": newTest.FG,
+        "ThreePM": newTest.ThreePM,
+        "ThreePA": 42,
+        "ThreeP": newTest.ThreeP,
+        "FTM": newTest.FTM,
+        "FTA": newTest.FTA,
+        "FT": newTest.FT,
+        "OREB": newTest.OREB,
+        "DREB": newTest.DREB,
+        "REB": newTest.REB,
+        "AST": newTest.AST,
+        "STL": newTest.STL,
+        "BLK": newTest.BLK,
+        "TOV": newTest.TOV,
+        "PF": newTest.PF,
+        "PlusMinus": newTest.PlusMinus,
+        "OFFRTG": newTest.OFFRTG,
+        "DEFRTG": newTest.DEFRTG,
+        "NETRTG": newTest.NETRTG,
+        "AST": newTest.AST,
+        "ASTTO": newTest.ASTTO,
+        "ASTRATIO": newTest.ASTRATIO,
+        "Test": 31,
+        "Tesst": 31,
+        "Tdfesst": 31,
+        "OREB": newTest.OREB,
+        "DREB": newTest.DREB,
+        "REB": newTest.REB,
+        "TOV": newTest.TOV,
+        "EFG": newTest.EFG,
+        "TS": newTest.TS,
+        "PACE": newTest.PACE,
+        "PIE": newTest.PIE
+    }
+    return modalGame
+}
+
+ function getPrediction(games, liveGames, i) {
+
+    return new Promise((resolve, reject) => {
+        // get frist team data
+        let team1 = getTeam(games, liveGames[i].MatchUp.split(" vs. ")[0])
+
+        let {PythonShell} = require('python-shell')
+        //let pyshell = new PythonShell('/mnt/c/Users/Jose/Desktop/SeniorProject/sportsapi/python/modal.py');
+        let pyshell = new PythonShell(`\python\\modal.py`);
+        pyshell.send(JSON.stringify(Object.values(team1)))
+
+         pyshell.on('message', function (message) {
+            console.log("getting message")
+            console.log("Node: " + message)
+            if (message[1] == "1") {
+                liveGames[i].predictedWinner = liveGames[i].MatchUp.split(" vs. ")[0]
+            } else {
+                liveGames[i].predictedWinner = liveGames[i].MatchUp.split(" vs. ")[1]
+            }
+            
+            resolve(message)
+            return message
+            liveGames[i].predictedWinner = message
+        })
+
+         pyshell.end(function (err) {
+            console.log(err)
+            console.log('fin')
+        })
+    })
+
 }
 
 module.exports = router;

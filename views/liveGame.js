@@ -58,7 +58,7 @@ function loadLiveGames() {
             <tr>
               <th scope="row">${data[i].MatchUp}</th>
               <th scope="row">${data[i].GameDate}</th>
-              <th scope="row">ATL</th>
+              <th scope="row">${data[i].predictedWinner}</th>
               <th scope="row">${data[i].currentScore}</th>
             </tr>
           `        

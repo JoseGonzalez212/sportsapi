@@ -13,8 +13,15 @@ router.get('/', async (req, res) => {
 });
 
 // Get one player
-router.get('/:id', getPlayer, (req, res) => {
-    res.send(res.player);
+router.get('/:Team', async (req, res) => {
+  try {
+    const players = await player.find({Team: req.params.Team});
+    console.log("players")
+    console.log(player)
+    res.json(players);
+} catch (err) {
+    res.status(500).json({ message: err.message});
+}
 });
 
 // Create one

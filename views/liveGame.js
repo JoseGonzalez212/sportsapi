@@ -39,7 +39,7 @@ function loadLiveGames() {
       let data = JSON.parse(Http.response);
       let div = document.createElement("div");
       let table = `
-      <h5>Team List</h5>
+      <h5>Live Games</h5>
         <div>
         <table class=\"table teamtable\">
           <thead>

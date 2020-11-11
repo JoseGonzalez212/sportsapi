@@ -2,6 +2,40 @@
 // It will then create the HTML to display the table
 // Lastly it will append the HTML onto the app
 
+const teamsName = {
+  "ATL": "Atlanta Hawks",
+  "BKN": "Brooklyn Nets",
+  "BOS": "Boston Celtics",
+  "CHA": "Charlotte Hornets",
+  "CHI": "Chicago Bulls",
+  "CLE": "Cleveland Cavaliers",
+  "DAL": "Dallas Mavericks",
+  "DEN": "Denver Nuggets",
+  "DET": "Detroit Pistons",
+  "GSW": "Golden State Warriors",
+  "HOU": "Houston Rockets",
+  "IND": "Indiana Pacers",
+  "LAC": "LA Clippers",
+  "LAL": "Los Angeles Lakers",
+  "MEM": "Memphis Grizzlies",
+  "MIA": "Miami Heat",
+  "MIL": "Milwaukee Bucks",
+  "MIN": "Minnesota Timberwolves",
+  "NOP": "New Orleans Pelicans",
+  "NYK": "New York Knicks",
+  "OKC": "Oklahoma City Thunder",
+  "ORL": "Orlando Magic",
+  "PHI": "Philadelphia 76ers",
+  "PHX": "Phoenix Suns",
+  "POR": "Portland Trail Blazers",
+  "SAC": "Sacramento Kings",
+  "SAS": "San Antonio Spurs",
+  "TOR": "Toronto Raptors",
+  "UTA": "Utah Jazz",
+  "WAS": "Washington Wizards"
+  }
+  
+
 function loadTeamsList() {
 
 
@@ -64,7 +98,7 @@ function singleTeam(event, id) {
   const url='http://localhost:3000/teams/';
   Http.open("GET", url); 
   Http.send();
-
+  
 
   Http.onreadystatechange = function() {
     if (this.readyState==4 && this.status ==200) {
@@ -112,6 +146,66 @@ function singleTeam(event, id) {
       div.innerHTML = table;
       let content = document.getElementById("content")
       content.innerHTML = table;
+      loadPlayerTeam(team)
+    }
+  }
+}
+
+function loadPlayerTeam(team) {
+  console.log("test")
+  let realTeam;
+  const Http = new XMLHttpRequest();
+  for (const key in teamsName) {
+    if (teamsName[key] == team) {
+        realTeam = key
+    }
+  }
+  console.log(realTeam)
+  const url='http://localhost:3000/players/' + realTeam;
+  Http.open("GET", url); 
+  Http.send();
+
+  Http.onreadystatechange = function() {
+    if (this.readyState==4 && this.status ==200) {
+      let data = JSON.parse(Http.response);
+      let div = document.createElement("div");
+      data.sort((a, b) => parseInt(b.PTS) - parseInt(a.PTS))
+      console.log(data)
+    let table = `
+    <div class="season-select">
+      <h5>Top Players</h5>
+        <table class=\"table teamtable gameTable\">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Name</th>
+              <th scope="col">Team</th>
+              <th scope="col">Avg Points Per Game</th>
+            </tr>
+          </thead>
+          <tbody id="gameRows">
+      `;
+      
+      for (let i = 0; i < 5; i++) {
+        table += `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${data[i].Player}</td>
+            <td>${data[i].Team}</td>
+            <td>${data[i].PTS}</td>
+          </tr>
+        `
+      }
+
+      table += `
+          </tbody>
+        </table>
+        </div>
+      `;
+      div.innerHTML = table;
+
+      let content = document.getElementById("content")
+      content.innerHTML += table;
     }
   }
 }

@@ -5,7 +5,7 @@ const player = require('../models/player');
 // Get all players
 router.get('/', async (req, res) => {
     try {
-        const players = await player.find();
+        const players = await player.find({Drafted: null});
         res.json(players);
     } catch (err) {
         res.status(500).json({ message: err.message});

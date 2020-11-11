@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const draft = require('../models/draft');
+const player = require('../models/player');
+
+
+router.get('/', async (req, res) => {
+    try {
+        const players = await player.find({Drafted: "1"});
+
+        res.json(players);
+    } catch (err) {
+        res.status(500).json({ message: err.message});
+    }
+});
 
 // Get one user
 router.get('/:id', getDraft, (req, res) => {

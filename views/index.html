@@ -31,8 +31,8 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#" onclick="loadPlayersAPG(this)">Points Per Game</a>
-                    <a class="dropdown-item" href="#" onclick="loadPlayersBlocks(this)">Blocks Per Game</a>
-                    <a class="dropdown-item" href="#" onclick="loadPlayersAPPG(this)">Assists Per Game</a>
+                    <a class="dropdown-item" href="#" onclick="loadPlayersBlocks(this)">Three Points Made</a>
+                    <a class="dropdown-item" href="#" onclick="loadPlayersAPPG(this)">Free Throws Made</a>
                   </div>
                 </li>
                 <li class="nav-item">
@@ -45,7 +45,7 @@
                     <a class="nav-link" onclick="loadLiveGames()" href="#">Live</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Drafts</a>
+                  <a class="nav-link" onclick="loadDraft()" href="#">Drafts</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Developer Mode</a>
@@ -59,7 +59,7 @@
     
       </div>
       
-
+      <script src="draft.js"></script>
       <script src="liveGame.js"></script>
       <script src="teamsList.js"></script>
       <script src="players.js"></script>

@@ -29,7 +29,7 @@ const player = [
 function loadPlayersAPG() {
   console.log("test")
   const Http = new XMLHttpRequest();
-  const url='http://localhost:3000/games';
+  const url='http://localhost:3000/players';
   Http.open("GET", url); 
   Http.send();
 
@@ -37,13 +37,14 @@ function loadPlayersAPG() {
     if (this.readyState==4 && this.status ==200) {
       let data = JSON.parse(Http.response);
       let div = document.createElement("div");
-
+      data.sort((a, b) => parseInt(b.PTS) - parseInt(a.PTS))
     let table = `
     <div class="season-select">
       <h5>Top Players: Average Points Per Game</h5>
         <table class=\"table teamtable gameTable\">
           <thead>
             <tr>
+            <th scope="col"></th>
               <th scope="col">Name</th>
               <th scope="col">Team</th>
               <th scope="col">Avg Points Per Game</th>
@@ -52,12 +53,13 @@ function loadPlayersAPG() {
           <tbody id="gameRows">
       `;
       
-      for (let i = 0; i < player.length; i++) {
+      for (let i = 0; i < 50; i++) {
         table += `
           <tr>
-            <td>${player[i].Name}</td>
-            <td>${player[i].Team}</td>
-            <td>${player[i].APG}</td>
+          <td>${i + 1}</td>
+            <td>${data[i].Player}</td>
+            <td>${data[i].Team}</td>
+            <td>${data[i].PTS}</td>
           </tr>
         `
       }
@@ -78,7 +80,7 @@ function loadPlayersAPG() {
 function loadPlayersBlocks() {
   console.log("test")
   const Http = new XMLHttpRequest();
-  const url='http://localhost:3000/games';
+  const url='http://localhost:3000/players';
   Http.open("GET", url); 
   Http.send();
 
@@ -86,27 +88,30 @@ function loadPlayersBlocks() {
     if (this.readyState==4 && this.status ==200) {
       let data = JSON.parse(Http.response);
       let div = document.createElement("div");
+      data.sort((a, b) => parseInt(b.ThreePM) - parseInt(a.ThreePM))
 
     let table = `
     <div class="season-select">
-      <h5>Top Players: Average Blocks Per Game</h5>
+      <h5>Top Players: Three Points Made</h5>
         <table class=\"table teamtable gameTable\">
           <thead>
             <tr>
+            <th scope="col"></th>
               <th scope="col">Name</th>
               <th scope="col">Team</th>
-              <th scope="col">Blocks Per Game</th>
+              <th scope="col">Three Points Made</th>
             </tr>
           </thead>
           <tbody id="gameRows">
       `;
       
-      for (let i = 0; i < player.length; i++) {
+      for (let i = 0; i < 50; i++) {
         table += `
           <tr>
-            <td>${player[i].Name}</td>
-            <td>${player[i].Team}</td>
-            <td>${player[i].APG}</td>
+          <td>${i + 1}</td>
+            <td>${data[i].Player}</td>
+            <td>${data[i].Team}</td>
+            <td>${data[i].ThreePM}</td>
           </tr>
         `
       }
@@ -127,7 +132,7 @@ function loadPlayersBlocks() {
 function loadPlayersAPPG() {
   console.log("test")
   const Http = new XMLHttpRequest();
-  const url='http://localhost:3000/games';
+  const url='http://localhost:3000/players';
   Http.open("GET", url); 
   Http.send();
 
@@ -135,27 +140,29 @@ function loadPlayersAPPG() {
     if (this.readyState==4 && this.status ==200) {
       let data = JSON.parse(Http.response);
       let div = document.createElement("div");
-
+      data.sort((a, b) => parseInt(b.FTM) - parseInt(a.FTM))
     let table = `
     <div class="season-select">
-      <h5>Top Players: Average Assists Per Game</h5>
+      <h5>Top Players: Free Throws Made</h5>
         <table class=\"table teamtable gameTable\">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">Name</th>
               <th scope="col">Team</th>
-              <th scope="col">Assists Per Game</th>
+              <th scope="col">Free Throws Made</th>
             </tr>
           </thead>
           <tbody id="gameRows">
       `;
       
-      for (let i = 0; i < player.length; i++) {
+      for (let i = 0; i < 50; i++) {
         table += `
           <tr>
-            <td>${player[i].Name}</td>
-            <td>${player[i].Team}</td>
-            <td>${player[i].APG}</td>
+          <td>${i + 1}</td>
+          <td>${data[i].Player}</td>
+          <td>${data[i].Team}</td>
+            <td>${data[i].FTM}</td>
           </tr>
         `
       }

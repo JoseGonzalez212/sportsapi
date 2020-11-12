@@ -141,37 +141,37 @@ function loadPlayersAPPG() {
       let data = JSON.parse(Http.response);
       let div = document.createElement("div");
       data.sort((a, b) => parseInt(b.FTM) - parseInt(a.FTM))
-    let table = `
-    <div class="season-select">
-      <h5>Top Players: Free Throws Made</h5>
-        <table class=\"table teamtable gameTable\">
-          <thead>
+      let table = `
+      <div class="season-select">
+        <h5>Top Players: Free Throws Made</h5>
+          <table class=\"table teamtable gameTable\">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Team</th>
+                <th scope="col">Free Throws Made</th>
+              </tr>
+            </thead>
+            <tbody id="gameRows">
+        `;
+        
+        for (let i = 0; i < 50; i++) {
+          table += `
             <tr>
-              <th scope="col"></th>
-              <th scope="col">Name</th>
-              <th scope="col">Team</th>
-              <th scope="col">Free Throws Made</th>
+            <td>${i + 1}</td>
+            <td>${data[i].Player}</td>
+            <td>${data[i].Team}</td>
+              <td>${data[i].FTM}</td>
             </tr>
-          </thead>
-          <tbody id="gameRows">
-      `;
-      
-      for (let i = 0; i < 50; i++) {
-        table += `
-          <tr>
-          <td>${i + 1}</td>
-          <td>${data[i].Player}</td>
-          <td>${data[i].Team}</td>
-            <td>${data[i].FTM}</td>
-          </tr>
-        `
-      }
+          `
+        }
 
-      table += `
-          </tbody>
-        </table>
-        </div>
-      `;
+        table += `
+            </tbody>
+          </table>
+          </div>
+        `;
       div.innerHTML = table;
 
       let content = document.getElementById("content")

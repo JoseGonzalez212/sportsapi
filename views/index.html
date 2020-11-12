@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" onclick="loadTeams()" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#" onclick="loadTeamsList()">Teams</a>
@@ -48,7 +48,10 @@
                   <a class="nav-link" onclick="loadDraft()" href="#">Drafts</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Developer Mode</a>
+                  <a class="nav-link" onclick="loadSearch()" href="#">Search</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" onclick="loadSignIn()" href="#">Developer Mode</a>
                 </li>
               </ul>
             </div>
@@ -58,7 +61,7 @@
           </div>
     
       </div>
-      
+      <script src="search.js"></script>
       <script src="draft.js"></script>
       <script src="liveGame.js"></script>
       <script src="teamsList.js"></script>

@@ -33,7 +33,7 @@ const teamsName = {
   "TOR": "Toronto Raptors",
   "UTA": "Utah Jazz",
   "WAS": "Washington Wizards"
-  }
+}
   
 
 function loadTeamsList() {
@@ -114,6 +114,8 @@ function singleTeam(event, id) {
       <h5>${teamData.team}</h5>
       <p>Ranking: ${teamData.ranking}</p>
       <p>Conference: ${teamData.Conference}</p>
+      <div id="team-players-list"> </div>
+      <h5>Team stats</h5>
         <div>
         <table class=\"table teamtable\">
           <thead>
@@ -204,7 +206,7 @@ function loadPlayerTeam(team) {
       `;
       div.innerHTML = table;
 
-      let content = document.getElementById("content")
+      let content = document.getElementById("team-players-list")
       content.innerHTML += table;
     }
   }

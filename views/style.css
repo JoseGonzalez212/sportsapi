@@ -49,3 +49,8 @@
   display: inline-grid;
   grid-template-columns: auto auto;
 }
+
+
+.searchbox {
+  width: 50%;
+}
